@@ -24,9 +24,6 @@ include_recipe "cloudstack::repo"
 
 package "cloudstack-management" do
    action :install
-   if ! node['cloudstack']['version'].empty?
-     version node['cloudstack']['version']
-   end
 end
 include_recipe "cloudstack::vhd-util"
 
