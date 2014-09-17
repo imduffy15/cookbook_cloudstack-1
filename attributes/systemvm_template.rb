@@ -34,7 +34,7 @@ when "4.4"
         "lxc" => "http://cloudstack.apt-get.eu/systemvm/4.4/systemvm64template-4.4.0-6-kvm.qcow2.bz2",
         "hyperv" => "http://cloudstack.apt-get.eu/systemvm/4.4/systemvm64template-4.4.0-6-hyperv.vhd"
     }
-when "4.3"
+when "4.3" || "4.3.1"
     default['cloudstack']['hypervisor_tpl'] = {
         "xenserver" => "http://download.cloud.com/templates/4.3/systemvm64template-2014-06-23-master-xen.vhd.bz2",
         "vmware" => "http://download.cloud.com/templates/4.3/systemvm64template-2014-06-23-master-vmware.ova",
