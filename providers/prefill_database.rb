@@ -32,7 +32,7 @@ end
 
 def load_current_resource
   @current_resource = Chef::Resource::CloudstackPrefillDatabase.new(@new_resource.name)
-  @current_resource.name(@new_resource.name)
+  @current_resource.file(@new_resource.name)
   @current_resource.ip(@new_resource.ip)
   @current_resource.user(@new_resource.user)
   @current_resource.password(@new_resource.password)
