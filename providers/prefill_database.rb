@@ -20,10 +20,11 @@
 
 action :run do
 
-	if File.exists(@current_resource.file) do
-	  bash "mysql" do
-	    code "/usr/bin/mysql -u #{@current_resource.user} -p#{@current_resource.password} -h #{@current_resource.ip} cloud < #{@current_resource.file}"
-	  end
+	bash "mysql" do
+		code "/usr/bin/mysql -u #{@current_resource.user} -p#{@current_resource.password} -h #{@current_resource.ip} cloud < #{@current_resource.file}"
+		not_if do
+    		File.exists?(@current_resource.file)
+  		end
 	end
 
 end
