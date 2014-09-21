@@ -23,10 +23,10 @@ actions :create, :reset
 
 default_action :create
 
-attribute :username       , :name_attribute => true, :kind_of => String
-attribute :url            , :kind_of => String, :default => "http://localhost:8080/client/api"
-attribute :password       , :kind_of => String, :default => "password"
-attribute :admin_apikey   , :kind_of => String
+attribute :username, :name_attribute => true, :kind_of => String
+attribute :url, :kind_of => String, :default => 'http://localhost:8080/client/api'
+attribute :password, :kind_of => String, :default => 'password'
+attribute :admin_apikey, :kind_of => String
 attribute :admin_secretkey, :kind_of => String
 
 attr_accessor :exists

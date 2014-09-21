@@ -20,23 +20,23 @@
 # Apache repos:
 ###############
 # version = version of package to install if not define = latest from the repo
-default['cloudstack']['version'] = ""
+default['cloudstack']['version'] = ''
 # relase_major = release version, used for the repo URL
 if node['cloudstack']['version'].empty?
-    default['cloudstack']['release_major'] = "4.4"
+  default['cloudstack']['release_major'] = '4.4'
 else
-    default['cloudstack']['release_major'] =  "#{node['cloudstack']['version'].split('.')[0]}.#{node['cloudstack']['version'].split('.')[1]}"
+  default['cloudstack']['release_major'] = "#{node['cloudstack']['version'].split('.')[0]}.#{node['cloudstack']['version'].split('.')[1]}"
 end
 
 # yum repo URL
 default['cloudstack']['yum_repo'] = "http://cloudstack.apt-get.eu/rhel/#{node['cloudstack']['release_major']}/"
 # apt repo URL
-default['cloudstack']['apt_repo'] = "http://cloudstack.apt-get.eu/ubuntu"
+default['cloudstack']['apt_repo'] = 'http://cloudstack.apt-get.eu/ubuntu'
 
 
 # Secondary Storage
-default['cloudstack']['secondary']['host'] = node["ipaddress"]
-default['cloudstack']['secondary']['path'] = "/data/secondary"
+default['cloudstack']['secondary']['host'] = node['ipaddress']
+default['cloudstack']['secondary']['path'] = '/data/secondary'
 default['cloudstack']['secondary']['mgt_path'] = node['cloudstack']['secondary']['path']
 
 

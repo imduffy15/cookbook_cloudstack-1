@@ -21,11 +21,13 @@
 # Only work on acs4.3 and later
 
 directory '/etc/cloudstack/management/META-INF/cloudstack/core' do
-  owner "root"
-  group "root"
+  owner 'root'
+  group 'root'
   recursive true
   action :create
-  only_if do ::Dir.exists?('/etc/cloudstack/management') end
+  only_if do
+    ::Dir.exists?('/etc/cloudstack/management')
+  end
 end
 
 template '/etc/cloudstack/management/META-INF/cloudstack/core/spring-event-bus-context.xml' do
@@ -33,12 +35,14 @@ template '/etc/cloudstack/management/META-INF/cloudstack/core/spring-event-bus-c
   owner 'root'
   group 'root'
   mode 0644
-  variables(:host     => node['cloudstack']['event']['RabbitMQEventBus']['host'],
-            :port     => node['cloudstack']['event']['RabbitMQEventBus']['port'],
+  variables(:host => node['cloudstack']['event']['RabbitMQEventBus']['host'],
+            :port => node['cloudstack']['event']['RabbitMQEventBus']['port'],
             :username => node['cloudstack']['event']['RabbitMQEventBus']['username'],
             :password => node['cloudstack']['event']['RabbitMQEventBus']['password'],
             :exchange => node['cloudstack']['event']['RabbitMQEventBus']['exchange']
-            )
-  notifies :restart, "service[cloudstack-management]", :delayed
-  only_if do ::Dir.exists?('/etc/cloudstack/management') end
+  )
+  notifies :restart, 'service[cloudstack-management]', :delayed
+  only_if do
+    ::Dir.exists?('/etc/cloudstack/management')
+  end
 end

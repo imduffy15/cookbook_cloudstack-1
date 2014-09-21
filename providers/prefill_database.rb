@@ -18,22 +18,24 @@
 # prefill the database with custom values.
 ###############################################################################
 
-action :run do
-
-	bash "mysql" do
-		code "/usr/bin/mysql -u #{@current_resource.user} -p#{@current_resource.password} -h #{@current_resource.ip} cloud < #{@current_resource.file}"
-		not_if do
-    		File.exists?(@current_resource.file)
-  		end
-	end
-
+# Support whyrun
+def whyrun_supported?
+  true
 end
 
+action :run do
+  bash 'Prefilling database' do
+    code "mysql -u#{ new_resource.user } -p#{ new_resource.password } -h #{ new_resource.ip } < #{new_resource.name}"
+    only_if do
+      ::File.exists?(new_resource.name)
+    end
+  end
+end
 
 def load_current_resource
   @current_resource = Chef::Resource::CloudstackPrefillDatabase.new(@new_resource.name)
-  @current_resource.file(@new_resource.name)
-  @current_resource.ip(@new_resource.ip)
+  @current_resource.name(@new_resource.name)
   @current_resource.user(@new_resource.user)
   @current_resource.password(@new_resource.password)
+  @current_resource.ip(@new_resource.ip)
 end

@@ -20,12 +20,12 @@
 ####
 
 include_recipe 'cloudstack::default'
-include_recipe "cloudstack::repo"
+include_recipe 'cloudstack::repo'
 
-package "cloudstack-management" do
-   action :install
+package 'cloudstack-management' do
+  action :install
 end
-include_recipe "cloudstack::vhd-util"
+include_recipe 'cloudstack::vhd-util'
 
 
 #
@@ -36,10 +36,10 @@ template node['cloudstack']['nproc_limit_file'] do
   owner 'root'
   group 'root'
   mode 0755
-  variables :user          => node['cloudstack']['username'],
-            :hard          => node['cloudstack']['nproc_limit_hard'],
-            :soft          => node['cloudstack']['nproc_limit_soft'],
-            :recipe_file   => (__FILE__).to_s.split("cookbooks/").last,
+  variables :user => node['cloudstack']['username'],
+            :hard => node['cloudstack']['nproc_limit_hard'],
+            :soft => node['cloudstack']['nproc_limit_soft'],
+            :recipe_file => (__FILE__).to_s.split('cookbooks/').last,
             :template_file => source.to_s
 end
 
@@ -51,21 +51,20 @@ template node['cloudstack']['nofile_limit_file'] do
   owner 'root'
   group 'root'
   mode 0755
-  variables :user          => node['cloudstack']['username'],
-            :hard          => node['cloudstack']['nofile_limit_hard'],
-            :soft          => node['cloudstack']['nofile_limit_soft'],
-            :recipe_file   => (__FILE__).to_s.split("cookbooks/").last,
+  variables :user => node['cloudstack']['username'],
+            :hard => node['cloudstack']['nofile_limit_hard'],
+            :soft => node['cloudstack']['nofile_limit_soft'],
+            :recipe_file => (__FILE__).to_s.split('cookbooks/').last,
             :template_file => source.to_s
 end
 
 
 # Configure sudo for user cloud
-include_recipe "sudo"
+include_recipe 'sudo'
 node.set['authorization']['sudo']['include_sudoers_d'] = true
 sudo 'cloud' do
   template 'sudoers_cloudstack.erb'
 end
-
 
 
 #service "cloudstack-management" do

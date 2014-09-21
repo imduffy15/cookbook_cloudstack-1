@@ -38,7 +38,7 @@ end
 def load_current_resource
   @current_resource = Chef::Resource::CloudstackSystemTemplate.new(@new_resource.name)
   @current_resource.name(@new_resource.name)
-  @current_resource.url(@new_resource.url)  
+  @current_resource.url(@new_resource.url)
   @current_resource.hypervisor(@new_resource.hypervisor)
   @current_resource.nfs_path(@new_resource.nfs_path)
   @current_resource.nfs_server(@new_resource.nfs_server)
@@ -63,7 +63,7 @@ def load_current_resource
         @current_resource.exists = false
       end
     else
-      Chef::Log.error "Database not configured. Cannot retrieve Template URL"
+      Chef::Log.error 'Database not configured. Cannot retrieve Template URL'
     end
   end
 
@@ -72,7 +72,7 @@ end
 # retrieve template ID from database
 def get_template_id
   # get template ID from database to check path
-  Chef::Log.debug "Retrieve template ID from database"
+  Chef::Log.debug 'Retrieve template ID from database'
   template_cmd = "mysql -h #{@current_resource.db_host} --user=#{@current_resource.db_user} --password=#{@current_resource.db_password} --skip-column-names -U cloud -e 'select max(id) from cloud.vm_template where type = \"SYSTEM\" and hypervisor_type = \"#{@current_resource.hypervisor}\" and removed is null'"
   template_id = Mixlib::ShellOut.new(template_cmd)
   template_id.run_command
@@ -85,8 +85,8 @@ end
 def secondary_storage
   unless ::File.exist?(@current_resource.nfs_path)
     directory @current_resource.nfs_path do
-      owner "root"
-      group "root"
+      owner 'root'
+      group 'root'
       action :create
       recursive true
     end
@@ -94,12 +94,12 @@ def secondary_storage
 end
 
 def download_systemvm_template
-    # Create database configuration for cloudstack management server that will use and existing database.
-    #puts "Downloading system template from: #{@current_resource.url}"
-    Chef::Log.info "Downloading system template for #{@current_resource.hypervisor}, this will take some time..."
-    download_cmd = "/usr/share/cloudstack-common/scripts/storage/secondary/cloud-install-sys-tmplt  -m #{@current_resource.nfs_path} -u #{@current_resource.url} -h #{@current_resource.hypervisor} -F"
-    download_template = Mixlib::ShellOut.new(download_cmd)
-    download_template.run_command
-    if download_template.exitstatus == 0
+  # Create database configuration for cloudstack management server that will use and existing database.
+  #puts "Downloading system template from: #{@current_resource.url}"
+  Chef::Log.info "Downloading system template for #{@current_resource.hypervisor}, this will take some time..."
+  download_cmd = "/usr/share/cloudstack-common/scripts/storage/secondary/cloud-install-sys-tmplt  -m #{@current_resource.nfs_path} -u #{@current_resource.url} -h #{@current_resource.hypervisor} -F"
+  download_template = Mixlib::ShellOut.new(download_cmd)
+  download_template.run_command
+  if download_template.exitstatus == 0
   end
 end

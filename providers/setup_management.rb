@@ -21,9 +21,9 @@
 
 action :run do
 
-  bash "cloudstack-setup-management" do
-    code "/usr/bin/cloudstack-setup-management"
-    not_if { ::File.exists?("/etc/cloudstack/management/tomcat6.conf") }
+  bash 'cloudstack-setup-management' do
+    code '/usr/bin/cloudstack-setup-management'
+    not_if { ::File.exists?('/etc/cloudstack/management/tomcat6.conf') }
   end
 
 end

@@ -19,12 +19,12 @@
 
 template '/etc/mysql/conf.d/cloudstack.cnf' do
   owner 'mysql'
-  owner 'mysql'      
+  owner 'mysql'
   source 'cloudstack.cnf.erb'
   variables ({
-    :innodb_rollback_on_timeout => node["cloudstack"]["mysql"]["innodb_rollback_on_timeout"],
-    :innodb_lock_wait_timeout => node["cloudstack"]["mysql"]["innodb_lock_wait_timeout"],
-    :max_connections => node["cloudstack"]["mysql"]["max_connections"]
+      :innodb_rollback_on_timeout => node['cloudstack']['mysql']['innodb_rollback_on_timeout'],
+      :innodb_lock_wait_timeout => node['cloudstack']['mysql']['innodb_lock_wait_timeout'],
+      :max_connections => node['cloudstack']['mysql']['max_connections']
   })
   notifies :restart, 'mysql_service[default]', :immediately
 end

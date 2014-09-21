@@ -24,9 +24,9 @@ actions :run
 
 default_action :run
 
-attribute :file                 , :name_attribute => true, :kind_of => String
-attribute :ip                   , :kind_of => String, :default => "localhost"
-attribute :user                 , :kind_of => String, :default => "cloud"
-attribute :password             , :kind_of => String, :default => "password" 
+attribute :file, :name_attribute => true, :kind_of => String
+attribute :ip, :kind_of => String, :default => 'localhost'
+attribute :user, :kind_of => String, :default => 'cloud'
+attribute :password, :kind_of => String, :default => 'password'
 
 attr_accessor :exists

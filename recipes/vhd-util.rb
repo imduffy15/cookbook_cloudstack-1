@@ -19,10 +19,10 @@
 #
 # Download vhd-util tool that cannot be distributed.
 
-remote_file "#{node["cloudstack"]["vhd-util_path"]}/vhd-util" do
-    source node["cloudstack"]["vhd-util_url"] 
-    mode 0755
-    action :create_if_missing
-    only_if { node.recipes.include?('cloudstack::management_server') }
+remote_file "#{node['cloudstack']['vhd-util_path']}/vhd-util" do
+  source node['cloudstack']['vhd-util_url']
+  mode 0755
+  action :create_if_missing
+  only_if { node.recipes.include?('cloudstack::management_server') }
 end
 
