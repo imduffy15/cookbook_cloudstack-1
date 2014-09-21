@@ -24,10 +24,9 @@ def whyrun_supported?
 end
 
 action :run do
-  bash 'Prefilling database' do
-    code "mysql -u#{ new_resource.user } -p#{ new_resource.password } -h #{ new_resource.ip } < #{new_resource.name}"
-    only_if do
-      ::File.exists?(new_resource.name)
+  if File.exists?(new_resource.name)
+    bash 'Prefilling database' do
+      code "mysql -u#{ new_resource.user } -p#{ new_resource.password } -h #{ new_resource.ip } < #{new_resource.name}"
     end
   end
 end
