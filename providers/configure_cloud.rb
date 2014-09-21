@@ -38,7 +38,7 @@ action :run do
     if cloudstack_api_is_running?
 
       template '/tmp/marvin.cfg' do
-        source new_resource.file
+        source new_resource.name
         local true
         variables(
             :management_server_ip => new_resource.management_server_ip,
@@ -54,7 +54,7 @@ action :run do
       end
 
       bash 'Configuring the cloud' do
-        code 'python2.7 -m marvin.deployDataCenter -i /tmp/marvin.cfg || true'
+        code 'python -m marvin.deployDataCenter -i /tmp/marvin.cfg || true'
       end
     end
   end
@@ -68,6 +68,7 @@ def load_current_resource
   @current_resource.admin_apikey(@new_resource.admin_apikey)
   @current_resource.admin_secretkey(@new_resource.admin_secretkey)
   @current_resource.database_server_ip(@new_resource.database_server_ip)
+  @current_resource.database_server_port(@new_resource.database_server_port)
   @current_resource.database_user(@new_resource.database_user)
   @current_resource.database_password(@new_resource.database_password)
   @current_resource.database(@new_resource.database)

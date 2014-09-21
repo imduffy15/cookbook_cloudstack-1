@@ -55,8 +55,8 @@ action :create do
         Chef::Log.info 'admin api keys: use existing'
       end
       #puts admin_keys
-      node.normal['cloudstack']['admin']['api_key'] = admin_keys[:api_key]
-      node.normal['cloudstack']['admin']['secret_key'] = admin_keys[:secret_key]
+      node.set['cloudstack']['admin']['api_key'] = admin_keys[:api_key]
+      node.set['cloudstack']['admin']['secret_key'] = admin_keys[:secret_key]
       node.save unless Chef::Config[:solo]
       $admin_apikey = admin_keys[:api_key]
       $admin_secretkey = admin_keys[:secret_key]
@@ -75,8 +75,8 @@ action :reset do
       converge_by('Reseting admin api keys') do
         admin_keys = generate_admin_keys(@current_resource.url, @current_resource.password)
         Chef::Log.info 'admin api keys: Generate new'
-        node.normal['cloudstack']['admin']['api_key'] = admin_keys[:api_key]
-        node.normal['cloudstack']['admin']['secret_key'] = admin_keys[:secret_key]
+        node.set['cloudstack']['admin']['api_key'] = admin_keys[:api_key]
+        node.set['cloudstack']['admin']['secret_key'] = admin_keys[:secret_key]
         node.save unless Chef::Config[:solo]
         $admin_apikey = admin_keys[:api_key]
         $admin_secretkey = admin_keys[:secret_key]

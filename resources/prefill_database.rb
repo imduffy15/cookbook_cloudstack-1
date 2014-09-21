@@ -24,7 +24,7 @@ actions :run
 
 default_action :run
 
-attribute :file, :name_attribute => true, :kind_of => String
+attribute :name, :name_attribute => true, :kind_of => String
 attribute :ip, :kind_of => String, :default => 'localhost'
 attribute :user, :kind_of => String, :default => 'cloud'
 attribute :password, :kind_of => String, :default => 'password'
