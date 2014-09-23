@@ -46,7 +46,7 @@ action :create do
 
   if cloudstack_api_is_running?
     # bypass the section if CloudStack is not running.
-    if !@current_resource.admin_apikey.nil? or !@current_resource.admin_secretkey.nil?
+    if (!@current_resource.admin_apikey.nil? or !@current_resource.admin_secretkey.nil?) and !Chef::Config[:solo]
       # if keys attributes are empty search in Chef environment for other node having API-KEYS.
       other_nodes = search(:node, "chef_environment:#{node.chef_environment} AND cloudstack_admin_api_key:* NOT name:#{node.name}")
       unless other_nodes.empty?
