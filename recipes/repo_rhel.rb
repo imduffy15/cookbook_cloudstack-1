@@ -19,6 +19,11 @@
 
 include_recipe 'yum'
 
+yum_globalconfig '/etc/yum.conf' do
+  keepcache true
+  action :create
+end
+
 yum_repository 'cloudstack' do
   description 'Apache Cloudstack'
   baseurl node['cloudstack']['yum_repo']

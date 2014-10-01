@@ -60,11 +60,11 @@ end
 
 
 # Configure sudo for user cloud
-include_recipe 'sudo'
-node.set['authorization']['sudo']['include_sudoers_d'] = true
-sudo 'cloud' do
-  template 'sudoers_cloudstack.erb'
-end
+# include_recipe 'sudo'
+# node.set['authorization']['sudo']['include_sudoers_d'] = true
+# sudo 'cloud' do
+#   template 'sudoers_cloudstack.erb'
+# end
 
 
 #service "cloudstack-management" do
