@@ -18,7 +18,7 @@
 #
 
 if platform?(%w{redhat centos fedora oracle})
-    include_recipe "cloudstack::repo_rhel"
+	include_recipe 'cloudstack::repo_rhel'
 elsif platform?(%w{ubuntu debian})
-    include_recipe "cloudstack::repo_ubuntu"
+	include_recipe 'cloudstack::repo_ubuntu'
 end

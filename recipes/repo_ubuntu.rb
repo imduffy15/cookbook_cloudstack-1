@@ -17,19 +17,19 @@
 # limitations under the License.
 #
 
-include_recipe "apt"
+include_recipe 'apt'
 
 # add Apache CloudStack .deb repo
-apt_repository "cloudstack" do
-  uri node['cloudstack']['apt_repo']
-  components [ node['cloudstack']['release_major'] ]
-  distribution "precise"
-  key "http://cloudstack.apt-get.eu/release.asc"
-  action :add
+apt_repository 'cloudstack' do
+	uri node['cloudstack']['apt_repo']
+	components [node['cloudstack']['release_major']]
+	distribution 'precise'
+	key 'http://cloudstack.apt-get.eu/release.asc'
+	action :add
 end
 
 
 package 'libmysql-java' do
-  action :install
-  #only_if { node['platform_version'] == "14.04" }
+	action :install
+	#only_if { node['platform_version'] == "14.04" }
 end

@@ -18,13 +18,13 @@
 # limitations under the License.
 #
 #
-# execute default cloudstack configuration script 
+# execute default cloudstack configuration script
 ###############################################################################
 
 actions :run
 
 default_action :run
 
-attribute :host                   , :name_attribute => true, :kind_of => String
+attribute :host, :name_attribute => true, :kind_of => String
 
 attr_accessor :exists

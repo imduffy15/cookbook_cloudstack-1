@@ -1,8 +1,7 @@
 #
-# Cookbook Name:: cloudstack
+# Cookbook Name:: marvin
 # Recipe:: default
-# Author:: Pierre-Luc Dion (<pdion@cloudops.com>)
-# Copyright 2014, CloudOps, Inc.
+# Author:: Ian Duffy (<ian@ianduffy.ie>)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,3 +21,23 @@ chef_gem 'cloudstack_ruby_client' do
 end.run_action(:install)
 Gem.clear_paths
 
+
+include_recipe 'cloudstack::repo'
+
+if platform?(%w{redhat centos fedora oracle})
+	bash 'Install Development tools' do
+		code <<-EOH
+        yum groupinstall "Development tools" -y
+		EOH
+		not_if "yum grouplist installed | grep 'Development tools'"
+	end
+elsif platform?(%w{ubuntu debian})
+	package 'build-essential'
+end
+
+package 'gmp-devel'
+package 'python-pip'
+package 'python-setuptools'
+package 'python-devel'
+
+python_pip 'cloudstack-marvin'

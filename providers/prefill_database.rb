@@ -1,8 +1,7 @@
 #
 # Cookbook Name:: cloudstack
-# Provider:: setup_management
-# Author:: Pierre-Luc Dion (<pdion@cloudops.com>)
-# Copyright:: Copyright (c) 2014 CloudOps.com
+# Provider:: prefill_database
+# Author:: Ian Duffy (<ian@ianduffy.ie>)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,14 +15,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-# execute default cloudstack configuration script
+# prefill the database with custom values.
 ###############################################################################
 
+# Support whyrun
+def whyrun_supported?
+	true
+end
+
 action :run do
-
-	bash 'cloudstack-setup-management' do
-		code '/usr/bin/cloudstack-setup-management'
-		not_if { ::File.exists?('/etc/cloudstack/management/tomcat6.conf') }
+	if ::File.exists?(new_resource.name)
+		bash 'Prefilling database' do
+			code "mysql -u#{ new_resource.user } -p#{ new_resource.password } -h #{ new_resource.ip } < #{new_resource.name}"
+		end
 	end
+end
 
+def load_current_resource
+	@current_resource = Chef::Resource::CloudstackPrefillDatabase.new(@new_resource.name)
+	@current_resource.name(@new_resource.name)
+	@current_resource.user(@new_resource.user)
+	@current_resource.password(@new_resource.password)
+	@current_resource.ip(@new_resource.ip)
 end

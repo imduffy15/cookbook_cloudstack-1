@@ -28,68 +28,68 @@ require 'uri'
 require 'net/http'
 
 module Cloudstack
-  
-  def port_open(ip, port, seconds=1)
-    Timeout::timeout(seconds) do
-      begin
-        TCPSocket.new(ip, port).close
-        true
-      rescue Errno::ECONNREFUSED, Errno::EHOSTUNREACH
-        false
-      end
-    end
-  rescue Timeout::Error
-    false
-  end
 
-  # Test if CloudStack Database already exist
-  def db_exist?(db_host="localhost", db_user="cloud", db_password="password")
-    conn_db_test = "mysql -h #{db_host} -u #{db_user} -p#{db_password} -e 'show databases;'|grep cloud"
-    conn_db_test_out = Mixlib::ShellOut.new(conn_db_test)
-    conn_db_test_out.run_command
-    if conn_db_test_out.exitstatus == 0
-      return true
-    else
-      return false
-    end 
-  end
+	def port_open(ip, port, seconds=1)
+		Timeout::timeout(seconds) do
+			begin
+				TCPSocket.new(ip, port).close
+				true
+			rescue Errno::ECONNREFUSED, Errno::EHOSTUNREACH
+				false
+			end
+		end
+	rescue Timeout::Error
+		false
+	end
 
-  def cloudstack_api_is_running?(host="localhost")
-    uri = URI("http://" + host + ":8080/client/api/")
-    cs_connect = Net::HTTP::Get.new(uri.to_s)
-    begin
-      response = Net::HTTP.start(uri.hostname, uri.port) {|http|
-        http.request(cs_connect)
-      }
-      if response.message == "Unauthorized"
-        return true
-      else
-        return false
-      end
-    rescue
-      return false
-    end
-  end
+	# Test if CloudStack Database already exist
+	def db_exist?(db_host='localhost', db_user='cloud', db_password='password')
+		conn_db_test = "mysql -h #{db_host} -u #{db_user} -p#{db_password} -e 'show databases;'|grep cloud"
+		conn_db_test_out = Mixlib::ShellOut.new(conn_db_test)
+		conn_db_test_out.run_command
+		if conn_db_test_out.exitstatus == 0
+			return true
+		else
+			return false
+		end
+	end
 
-  def cloudstack_is_running?
-    # Test if CloudStack Management server is running on localhost.
-    port_open('localhost', 8080)
-  end
+	def cloudstack_api_is_running?(host='localhost')
+		uri = URI('http://' + host + ':8080/client/api/')
+		cs_connect = Net::HTTP::Get.new(uri.to_s)
+		begin
+			response = Net::HTTP.start(uri.hostname, uri.port) { |http|
+				http.request(cs_connect)
+			}
+			if response.message == 'Unauthorized'
+				return true
+			else
+				return false
+			end
+		rescue
+			return false
+		end
+	end
 
-  def test_connection?(api_key, secret_key)
-    # test connection to CloudStack API
-    require 'cloudstack_ruby_client'
-    client = CloudstackRubyClient::Client.new("http://localhost:8080/client/api/", api_key, secret_key, false)
-    begin
-      test = client.list_accounts
-    rescue LoadError => e
-      Chef::Log.error("unable to contact CloudStack API: #{e}")
-    end
-    if test["count"] >= 1
-      return true
-    else
-      return false
-    end
-  end
+	def cloudstack_is_running?
+		# Test if CloudStack Management server is running on localhost.
+		port_open('localhost', 8080)
+	end
+
+	def test_connection?(api_key, secret_key)
+		# test connection to CloudStack API
+		require 'cloudstack_ruby_client'
+		client = CloudstackRubyClient::Client.new('http://localhost:8080/client/api/', api_key, secret_key, false)
+		begin
+			test = client.list_accounts
+		rescue LoadError => e
+			Chef::Log.error("unable to contact CloudStack API: #{e}")
+		end
+		if test['count'] >= 1
+			return true
+		else
+			return false
+		end
+	end
 
 end

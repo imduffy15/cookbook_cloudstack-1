@@ -17,13 +17,13 @@
 #
 # Install cloudstack-agent required on KVM hosts
 
-include_recipe "cloudstack::repo"
+include_recipe 'cloudstack::repo'
 
-package "cloudstack-agent" do
-   action :install
+package 'cloudstack-agent' do
+	action :install
 end
 
-service "cloudstack-agent" do
-   supports :status => true, :restart => true
-   action [ :enable, :start ]
+service 'cloudstack-agent' do
+	supports :status => true, :restart => true
+	action [:enable, :start]
 end

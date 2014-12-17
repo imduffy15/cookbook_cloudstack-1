@@ -18,30 +18,30 @@
 
 
 # System VM templates
-default['cloudstack']['cloud-install-sys-tmplt'] = "/usr/share/cloudstack-common/scripts/storage/secondary/cloud-install-sys-tmplt"
+default['cloudstack']['cloud-install-sys-tmplt'] = '/usr/share/cloudstack-common/scripts/storage/secondary/cloud-install-sys-tmplt'
 
 case node['cloudstack']['release_major']
-when "4.4"
-    default['cloudstack']['hypervisor_tpl'] = {
-        "xenserver" => "http://cloudstack.apt-get.eu/systemvm/4.4/systemvm64template-4.4.1-7-xen.vhd.bz2",
-        "vmware" => "http://cloudstack.apt-get.eu/systemvm/4.4/systemvm64template-4.4.1-7-vmware.ova",
-        "kvm" => "http://cloudstack.apt-get.eu/systemvm/4.4/systemvm64template-4.4.1-7-kvm.qcow2.bz2",
-        "lxc" => "http://cloudstack.apt-get.eu/systemvm/4.4/systemvm64template-4.4.1-7-kvm.qcow2.bz2",
-        "hyperv" => "http://cloudstack.apt-get.eu/systemvm/4.4/systemvm64template-4.4.1-7-hyperv.vhd"
-    }
-when "4.3"
-    default['cloudstack']['hypervisor_tpl'] = {
-        "xenserver" => "http://download.cloud.com/templates/4.3/systemvm64template-2014-06-23-master-xen.vhd.bz2",
-        "vmware" => "http://download.cloud.com/templates/4.3/systemvm64template-2014-06-23-master-vmware.ova",
-        "kvm" => "http://download.cloud.com/templates/4.3/systemvm64template-2014-06-23-master-kvm.qcow2.bz2",
-        "lxc" => "http://download.cloud.com/templates/4.3/systemvm64template-2014-06-23-master-kvm.qcow2.bz2",
-        "hyperv" => "http://download.cloud.com/templates/4.3/systemvm64template-2014-06-23-master-hyperv.vhd.bz2"
-    }
-when "4.2"
-    default['cloudstack']['hypervisor_tpl'] = {
-        "xenserver" => "http://d21ifhcun6b1t2.cloudfront.net/templates/4.2/systemvmtemplate-2013-07-12-master-xen.vhd.bz2",
-        "vmware" => "http://d21ifhcun6b1t2.cloudfront.net/templates/4.2/systemvmtemplate-4.2-vh7.ova",
-        "kvm" => "http://d21ifhcun6b1t2.cloudfront.net/templates/4.2/systemvmtemplate-2013-06-12-master-kvm.qcow2.bz2",
-        "lxc" => "http://d21ifhcun6b1t2.cloudfront.net/templates/acton/acton-systemvm-02062012.qcow2.bz2"
-    }
+	when '4.4'
+		default['cloudstack']['hypervisor_tpl'] = {
+				'xenserver' => 'http://cloudstack.apt-get.eu/systemvm/4.4/systemvm64template-4.4.1-7-xen.vhd.bz2',
+				'vmware' => 'http://cloudstack.apt-get.eu/systemvm/4.4/systemvm64template-4.4.1-7-vmware.ova',
+				'kvm' => 'http://cloudstack.apt-get.eu/systemvm/4.4/systemvm64template-4.4.1-7-kvm.qcow2.bz2',
+				'lxc' => 'http://cloudstack.apt-get.eu/systemvm/4.4/systemvm64template-4.4.1-7-kvm.qcow2.bz2',
+				'hyperv' => 'http://cloudstack.apt-get.eu/systemvm/4.4/systemvm64template-4.4.1-7-hyperv.vhd'
+		}
+	when '4.3'
+		default['cloudstack']['hypervisor_tpl'] = {
+				'xenserver' => 'http://download.cloud.com/templates/4.3/systemvm64template-2014-06-23-master-xen.vhd.bz2',
+				'vmware' => 'http://download.cloud.com/templates/4.3/systemvm64template-2014-06-23-master-vmware.ova',
+				'kvm' => 'http://download.cloud.com/templates/4.3/systemvm64template-2014-06-23-master-kvm.qcow2.bz2',
+				'lxc' => 'http://download.cloud.com/templates/4.3/systemvm64template-2014-06-23-master-kvm.qcow2.bz2',
+				'hyperv' => 'http://download.cloud.com/templates/4.3/systemvm64template-2014-06-23-master-hyperv.vhd.bz2'
+		}
+	when '4.2'
+		default['cloudstack']['hypervisor_tpl'] = {
+				'xenserver' => 'http://d21ifhcun6b1t2.cloudfront.net/templates/4.2/systemvmtemplate-2013-07-12-master-xen.vhd.bz2',
+				'vmware' => 'http://d21ifhcun6b1t2.cloudfront.net/templates/4.2/systemvmtemplate-4.2-vh7.ova',
+				'kvm' => 'http://d21ifhcun6b1t2.cloudfront.net/templates/4.2/systemvmtemplate-2013-06-12-master-kvm.qcow2.bz2',
+				'lxc' => 'http://d21ifhcun6b1t2.cloudfront.net/templates/acton/acton-systemvm-02062012.qcow2.bz2'
+		}
 end

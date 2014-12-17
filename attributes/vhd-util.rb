@@ -17,6 +17,6 @@
 # limitations under the License.
 #
 
-# FOLLOWING ATTRIBUTES SHOULD NOT REQUIRE MODIFICATION  
-default['cloudstack']['vhd-util_url'] = "http://download.cloud.com.s3.amazonaws.com/tools/vhd-util"
-default['cloudstack']['vhd-util_path'] = "/usr/share/cloudstack-common/scripts/vm/hypervisor/xenserver"
+# FOLLOWING ATTRIBUTES SHOULD NOT REQUIRE MODIFICATION
+default['cloudstack']['vhd-util_url'] = 'http://download.cloud.com.s3.amazonaws.com/tools/vhd-util'
+default['cloudstack']['vhd-util_path'] = '/usr/share/cloudstack-common/scripts/vm/hypervisor/xenserver'

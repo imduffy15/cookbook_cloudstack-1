@@ -1,8 +1,7 @@
 #
 # Cookbook Name:: cloudstack
-# Resource:: init_db
-# Author:: Pierre-Luc Dion (<pdion@cloudops.com>)
-# Copyright:: Copyright (c) 2014 CloudOps.com
+# Resource:: import_database_prefill
+# Author:: Ian Duffy (<ian@ianduffy.ie>)
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.require "system_vm_template"
@@ -17,18 +16,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+#
+# prefill the database with custom values.
+###############################################################################
 
+actions :run
 
-actions :create
+default_action :run
 
-default_action :create
-
-attribute :ip, :name_attribute => true, :kind_of => String
+attribute :name, :name_attribute => true, :kind_of => String
+attribute :ip, :kind_of => String, :default => 'localhost'
 attribute :user, :kind_of => String, :default => 'cloud'
 attribute :password, :kind_of => String, :default => 'password'
-attribute :root_user, :kind_of => String, :default => 'root'
-attribute :root_password, :kind_of => String, :default => 'ilikerandompasswords'
-attribute :management_server_key, :kind_of => String, :default => 'password'
-attribute :database_key, :kind_of => String, :default => 'password'
 
 attr_accessor :exists
