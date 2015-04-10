@@ -95,5 +95,5 @@ end
 
 def download_systemvm_template
   Chef::Log.info "Downloading system template for #{@current_resource.hypervisor}, this will take some time..."
-  execute "{#node['cloudstack']['cloud-install-sys-tmplt']} -m #{@current_resource.nfs_path} -u #{@current_resource.url} -h #{@current_resource.hypervisor} -t #{@current_resource.hypervisor} -F"
+  execute "#{node['cloudstack']['cloud-install-sys-tmplt']} -m #{@current_resource.nfs_path} -u #{@current_resource.url} -h #{@current_resource.hypervisor} -t #{@current_resource.hypervisor} -F"
 end
