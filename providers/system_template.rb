@@ -96,7 +96,6 @@ end
 
 def download_systemvm_template
   Chef::Log.info "Downloading system template for #{@current_resource.hypervisor}, this will take some time..."
-  Chef::Log.info  @current_resource.template_id
   if @current_resource.template_id.nil?
     execute "#{node['cloudstack']['cloud-install-sys-tmplt']} -m #{@current_resource.nfs_path} -u #{@current_resource.url} -h #{@current_resource.hypervisor} -F"
   else
