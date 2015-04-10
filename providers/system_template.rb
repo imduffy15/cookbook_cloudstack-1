@@ -97,7 +97,7 @@ def download_systemvm_template
   # Create database configuration for cloudstack management server that will use and existing database.
   #puts "Downloading system template from: #{@current_resource.url}"
   Chef::Log.info "Downloading system template for #{@current_resource.hypervisor}, this will take some time..."
-  download_cmd = "/usr/share/cloudstack-common/scripts/storage/secondary/cloud-install-sys-tmplt  -m #{@current_resource.nfs_path} -u #{@current_resource.url} -h #{@current_resource.hypervisor} -F"
+  download_cmd = "{#node['cloudstack']['cloudstack_system_template']}  -m #{@current_resource.nfs_path} -u #{@current_resource.url} -h #{@current_resource.hypervisor} -F"
   download_template = Mixlib::ShellOut.new(download_cmd)
   download_template.run_command
   if download_template.exitstatus == 0
