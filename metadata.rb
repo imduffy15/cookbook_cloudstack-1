@@ -8,7 +8,7 @@ version '3.1.3'
 
 depends 'yum', '> 3.0'
 depends 'apt', '> 2.0'
-depends 'mysql', '> 5.2.0'
+depends 'mysql', '= 5.6.1'
 depends 'sudo', '>= 2.6.0'
 depends 'python'
 
