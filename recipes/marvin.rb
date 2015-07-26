@@ -40,4 +40,6 @@ package 'python-pip'
 package 'python-setuptools'
 package 'python-devel'
 
-python_pip 'cloudstack-marvin'
+python_pip 'cloudstack-marvin' do
+  options "--allow-external mysql-connector-python"
+end
